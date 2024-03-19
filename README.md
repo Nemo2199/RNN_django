@@ -17,7 +17,7 @@ Training process:
 
 **dga_domains_full.csv** - dataset for teaching. Contains legal and malicious domains.
 
-**django_web_interface** - Django web app for using previously made model. Contains a field to enter desired domain and predict if it is legal or malicious:
+**django_web_interface** - Django web app for using previously made model. Contains a field to enter a desired domain and predict if it is legal or malicious:
 
 <table align="center">
   <tr>
