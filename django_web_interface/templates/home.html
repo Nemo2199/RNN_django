@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DGA Detection</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="{% static '/icon 128x128.png' %}">
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .logo {
+        display: block;
+        margin: 20px auto 0;
+        width: 100px;
+        height: auto;
+      }
+
+      .form {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      .success {
+        color: green;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="{% static '/icon 128x128.png' %}" alt="DGA Detection" class="logo">
+      <h1>DGA Detection</h1>
+      {% if domain %}
+        <p>Domain: {{ domain }}</p>
+        {% if class_label == 'legit' %}
+          <p class="success">&#10003; Legitimate</p>
+        {% else %}
+          <p class="error">&#10007; DGA</p>
+        {% endif %}
+        <form method="get" action="{% url 'home' %}">
+          <input type="submit" value="Choose Another Domain">
+        </form>
+      {% else %}
+        <form method="post" class="form">
+          {% csrf_token %}
+          <label for="domain">Enter a domain:</label>
+          <input type="text" name="domain" id="domain" required>
+          <input type="submit" value="Predict">
+        </form>
+      {% endif %}
+    </div>
+  </body>
+</html>
